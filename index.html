@@ -1,77 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1"/> 
-<link href='CCEvents/fullcalendar.css' rel='stylesheet' />
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-<script src='CCEvents/lib/moment.min.js'></script>
-<script src='CCEvents/lib/jquery.min.js'></script>
-<script src='CCEvents/fullcalendar.min.js'></script>
-<script src='CCEvents/gcal.js'></script>
-<script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href='fullcalendar.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
+    <script src='lib/moment.min.js'></script>
+    <script src='lib/jquery.min.js'></script>
+    <script src='fullcalendar.min.js'></script>
+    <script src='gcal.js'></script>
+    <script src='js/hgFeed.js'></script>
+    <script src="js/calendar.js"></script>
+    <style>
 
-	$(document).ready(function() {
-	
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-				
-			},
-			defaultView: 'agendaWeek',
-			// US Holidays
-			minTime: "08:00:00",
-			maxTime: "21:00:00",
-			events: 'https://www.google.com/calendar/feeds/5a44ga7q4komvff5k57s1ilr3k%40group.calendar.google.com/public/basic',
-			
-			eventClick: function(event) {
-				// opens events in a popup window
-				//alert(event.description);
-				$("label[for='Title']").html(event.description);
-				//window.open(event.url, 'gcalevent', 'width=700,height=600');
-				return false;
-			},
-			
-			loading: function(bool) {
-				$('#loading').toggle(bool);
-			}
-			
-			
-		});
-		
-	});
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            font-size: 14px;
+        }
 
-</script>
-<style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
 
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-		
-	#loading {
-		display: none;
-		position: absolute;
-		top: 10px;
-		right: 10px;
-	}
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-</style>
+    </style>
 </head>
 <body>
 
-	<div id='loading'>loading...</div>
-
-	<div id='calendar'></div>
-	Name: <label for="Title"></label>
+<div id='loading'>loading...</div>
+<div id="calendarView">
+    <div id='calendar'></div>
+    <div id="information">
+        <p id="title"></p>
+        <p id="time"></p>
+        <p id="location"></p>
+        <p id="description"></p>
+    </div>
+</div>
 
 </body>
 </html>
