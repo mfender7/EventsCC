@@ -14,11 +14,10 @@ $(function () {
         events: json,
 
         eventClick: function (event) {
-            //alert(event.description);
-            //$("label[for='Title']").html(event.description);
             $('#title').html("Name: " + event.title);
             $('#time').html("Time: " + event.start + " - " + event.end);
             $('#location').html("Location: " + event.location);
+            $(this).css('background-color', 'red');
             if(event.description.length > 0) {
                 $('#description').html("Description: " + event.description).show();
             }
@@ -26,6 +25,10 @@ $(function () {
                 $('#description').hide();
             }
             return false;
+        },
+
+        dayClick: function(date, event, view){
+          $('#calendar').fullCalendar('changeView', 'agendaDay');
         },
 
         loading: function (bool) {
