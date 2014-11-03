@@ -11,15 +11,16 @@ function getJson() {
     var nodes = $(data).find("node");
     var json = { events: [] };
     for (var i = 0; i < nodes.length; i++) {
-        json.events.push({
-            id: nodes[i].id,
-            title: $(nodes[i].children[0]).text(),
-            start: $(nodes[i].children[16]).text(),
-            end: $(nodes[i].children[17]).text(),
-            description: $(nodes[i].children[2]).text(),
-            location: $(nodes[i].children[31]).text(),
-            editable: false
-        });
+      json.events.push({
+        id: nodes[i].id,
+        title: $(nodes[i].children[0]).text().replace(" ", "T"),
+        start: $(nodes[i].children[16]).text().replace(" ", "T"),
+        end: $(nodes[i].children[17]).text(),
+        description: $(nodes[i].children[2]).text(),
+        location: $(nodes[i].children[31]).text(),
+        editable: false,
+        backgroundColor: "CadetBlue" //color
+      });
     }
 
     //Events from PCDP google calendar
@@ -31,14 +32,14 @@ function getJson() {
     http.send(null);
     data = JSON.parse(http.responseText.substring(0, http.responseText.length - 2).replace('// API callback\ninsertAgenda(', '')).feed.entry;
     for(var i = 0; i < data.length; i++){
-      console.log(data[i].title.$t);
-        json.events.push({
-            title: data[i].title.$t,
-            start: data[i].gd$when[0].startTime.replace("T", " ").split(".")[0],
-            end: data[i].gd$when[0].endTime.replace("T", " ").split(".")[0],
-            description: data[i].content.$t,
-            location: data[i].gd$where[0].valueString
-        });
+      json.events.push({
+        title: data[i].title.$t,
+        start: data[i].gd$when[0].startTime.split(".")[0],
+        end: data[i].gd$when[0].endTime.split(".")[0],
+        description: data[i].content.$t,
+        location: data[i].gd$where[0].valueString,
+        backgroundColor: "DarkKhaki"
+      });
     }
 
     //cc orgs calendar as well?
