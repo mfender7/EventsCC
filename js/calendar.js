@@ -31,24 +31,15 @@ $(function () {
           event.backgroundColor = 'red';
           $('#calendar').fullCalendar('updateEvent', event);
 
-          /*
-          $(this).css('background-color', 'red');
           $('#title').html("Name: " + event.title);
-          $('#time').html("When: " + event.start._i.replace("T", " ") + " - " + event.end._i.replace("T", " "));
+          $('#time').html("When: " + event.start.format('MMM D h:mm a') + " - " + event.end.format('MMM D h:mm a'));
           $('#location').html("Location: " + event.location);
-          console.log($(this));
-          $('#hidId').val($(this));
-          $('#hidCol').val(event.backgroundColor);
-          //event.backgroundColor = 'darkred';
-          $('#calender').fullCalendar( 'rerenderEvents' );
           if(event.description.length > 0) {
-              $('#description').html("Description: " + event.description).show();
+            $('#description').html("Description: " + event.description);
           }
-          else{
-              $('#description').hide();
+          else {
+            $('#description').hide();
           }
-          return true;
-          */
         },
 
         dayClick: function(date, event, view){
@@ -58,6 +49,25 @@ $(function () {
 
         loading: function (bool) {
             $('#loading').toggle(bool);
+        },
+
+        eventMouseover: function (data, event, view) {
+          console.log(Object.keys(data.start));
+           tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#feb811;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + 'title: ' + data.title + '</br>' + 'start: ' + data.start.format('MMM D h:mm a') + '</br>end: ' + data.end.format('MMM D h:mm a') + '</br>location: ' + data.location + '</div>';
+           $("body").append(tooltip);
+           $(this).mouseover(function (e) {
+             $(this).css('z-index', 10000);
+             $('.tooltiptopicevent').fadeIn('500');
+             $('.tooltiptopicevent').fadeTo('10', 1.9);
+            }).mousemove(function (e) {
+              $('.tooltiptopicevent').css('top', e.pageY + 10);
+              $('.tooltiptopicevent').css('left', e.pageX + 20);
+            });
+        },
+
+        eventMouseout: function (data, event, view) {
+          $(this).css('z-index', 8);
+          $('.tooltiptopicevent').remove();
         }
     });
 });

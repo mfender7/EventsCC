@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
     <script src='lib/moment.min.js'></script>
     <script src='lib/jquery.min.js'></script>
+    <script src='lib/jquery.qtip.min.js'></script>
     <script src='fullcalendar.min.js'></script>
     <script src='gcal.js'></script>
     <script src='js/hgFeed.js'></script>
@@ -34,10 +35,15 @@
     </style>
 </head>
 <body>
-
 <div id='loading'>loading...</div>
 <div id="calendarView">
     <div id='calendar'></div>
+    <form>
+      <input type="checkbox" name="feeds" value="coc" onClick="" CHECKED>College of Computing<br>
+      <input type="checkbox" name="feeds" value="pcdp" onClick="" CHECKED>Career Development<br>
+      <!-- other feeds, like student orgs -->
+    </form>
+
     <div id="information">
         <p id="title"></p>
         <p id="time"></p>
