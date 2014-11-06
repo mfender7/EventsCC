@@ -1,4 +1,5 @@
 $(function () {
+    $('#addthisevent').hide();
     var json = getJson();
     $('#calendar').fullCalendar({
         header: {
@@ -14,7 +15,10 @@ $(function () {
         events: json,
 
         eventClick: function (event) {
-
+          setATE(event);
+          $('#addthisevent').show();
+          $('#atedrop1').show();
+          addthisevent.refresh();
           //event.backgroundColor = 'red';
           if($('#hidId').val() != ""){
             var id = parseInt($('#hidId').val());
@@ -31,15 +35,10 @@ $(function () {
           event.backgroundColor = 'red';
           $('#calendar').fullCalendar('updateEvent', event);
 
-          $('#title').html("Name: " + event.title);
-          $('#time').html("When: " + event.start.format('MMM D h:mm a') + " - " + event.end.format('MMM D h:mm a'));
-          $('#location').html("Location: " + event.location);
-          if(event.description.length > 0) {
-            $('#description').html("Description: " + event.description);
-          }
-          else {
-            $('#description').hide();
-          }
+          $('#title').html(event.title);
+          $('#time').html(event.start.format('MMM D h:mm a') + " - " + event.end.format('MMM D h:mm a'));
+          $('#location').html(event.location);
+          $('#description').html(event.description);
         },
 
         dayClick: function(date, event, view){
@@ -52,7 +51,6 @@ $(function () {
         },
 
         eventMouseover: function (data, event, view) {
-          console.log(Object.keys(data.start));
            tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#feb811;position:absolute;z-index:10001;padding:10px 10px 10px 10px ;  line-height: 200%;">' + 'title: ' + data.title + '</br>' + 'start: ' + data.start.format('MMM D h:mm a') + '</br>end: ' + data.end.format('MMM D h:mm a') + '</br>location: ' + data.location + '</div>';
            $("body").append(tooltip);
            $(this).mouseover(function (e) {
