@@ -12,7 +12,12 @@ $(function () {
         // US Holidays
         minTime: "08:00:00",
         maxTime: "21:00:00",
-        events: json,
+        googleCalendarApiKey: "AIzaSyC2o4On2bRlY1TH7Ny0g9eeRaUS3y0mMtk",
+        events:
+        {
+          googleCalendarId: '5a44ga7q4komvff5k57s1ilr3k@group.calendar.google.com',
+          className: 'gcal-event'
+        },
 
         eventClick: function (event) {
           setATE(event);
@@ -68,4 +73,5 @@ $(function () {
           $('.tooltiptopicevent').remove();
         }
     });
+    getHg();
 });
