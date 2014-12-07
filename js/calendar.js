@@ -44,6 +44,8 @@ $(function () {
           $('#time').html(event.start.format('MMM D h:mm a') + " - " + event.end.format('MMM D h:mm a'));
           $('#location').html(event.location);
           $('#description').html(event.description);
+
+          $('html, body').animate({scrollTop:$('#information').position().top}, 'slow');
         },
 
         dayClick: function(date, event, view){
